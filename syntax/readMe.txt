@@ -1,0 +1,1 @@
+Icons on all folders not work on .mtsx, just made it for fun.

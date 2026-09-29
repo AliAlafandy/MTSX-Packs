@@ -1,0 +1,59 @@
+{
+	name: ["Ellawy", ".ellawy"]
+
+	// hide: false
+	// ignoreCase: false
+
+	styles: [
+		"keyword" #0033B3 #CC7832
+		"keyword2" #800000 #AE8ABE
+		"type" #808000 #808000
+		"constant" #871094 #9876AA
+		// "function" #0050A4 #6DC6FF
+		"variable" #1750EB #58908A
+		"propKey" #083080 #CC7832
+		"propVal" #067D17 #6A8759
+		"operator" #205060 #508090
+		"number" #1750EB #6897BB
+		"string" #067D17 #6A8759
+		"strEscape" #0037A6 #CC7832
+		"comment" #8C8C8C #808080 @I
+		"boolean" #871094 #9876AA // @B
+		"null" #871094 #9876AA
+		"annotation" #7050E0 #6080B0
+		"error" #F50000 #BC3F3C
+	]
+
+	comment: {startsWith: "#"}
+	comment: {startsWith: "/#", endsWith: "#/"}
+
+	bracketPairs: ["{}", "[]", "()"]
+
+	contains: [
+		{match: /\/\/.*$/ 0: "comment"}
+
+		{start: {match: /\/\*/}, end: {match: /\*\//}, style: "comment"}
+		{start: {match: /"/}, end: {match: /"/}, style: "string", contains: [{match: /\\./, 0: "strEscape"}]}
+		{start: {match: /'/}, end: {match: /'/}, style: "string", contains: [{match: /\\./, 0: "strEscape"}]}
+
+		{match: /\b(function|end|if|else|elseif|for|while|do|return|break|continue|in|and|or|not|then)\b/ 0: "keyword"}
+		{match: /\b(local|global|const|var|let|set|import|include|require|export)\b/ 0: "keyword2"}
+		{match: /\b(bool|boolean|int|float|string|number|void|any|object|array)\b/ 0: "type"}
+		{match: /\b(true|false)\b/ 0: "boolean"}
+		{match: /\b(null)\b/ 0: "null"}
+
+		// {match: /\b(function)\s+([A-Za-z_][A-Za-z0-9_]*)/ 1: "keyword" 2: "function"}
+		// {match: /\b[A-Za-z_][A-Za-z0-9_]*(?=\s*\()/ 0: "function"}
+
+		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(bool|boolean|int|float|string|number|void|any|object|array)\b/ 1: "variable" 2: "type"}
+		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*:\s*\[\s*(bool|boolean|int|float|string|number|any|object)\s*\]/ 1: "variable" 2: "type"}
+		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\b/ 2: "propKey"}
+		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*:/ 1: "propKey"}
+
+		{number: "2|8|10|16", style: "number"}
+
+		// {match: /\+\+|--|==|!=|<=|>=|&&|\|\||\.\.|=>|=|\+|-|\*|\/|%|<|>|\!|\?|\.|&|\|/ 0: "operator"}
+		{match: /\+\+|~~|/ 0: "operator"}
+		{match: /@[A-Za-z_][A-Za-z0-9_]*/ 0: "annotation"}
+	]
+}

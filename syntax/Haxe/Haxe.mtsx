@@ -1,0 +1,58 @@
+{
+	name: ["Haxe", ".hx", ".hxc"]
+
+	// hide: false
+	// ignoreCase: false
+
+	styles: [
+		"keyword" #0033B3 #CC7832 // @B
+		"keyword2" #800000 #AE8ABE
+		"type" #871094 #9876AA
+		"constant" #871094 #9876AA
+		"number" #1750EB #6897BB
+		"string" #067D17 #6A8759
+		"strEscape" #0037A6 #CC7832
+		"comment" #8C8C8C #808080 @I
+		"meta" #9E880D #BBB529
+		"operator" #205060 #508090
+		"function" #0033B3 #BFA0 // @B
+		"className" #0033B3 #BFA0 // @B
+		// "variable" #1750EB #58908A
+		"propKey" #083080 #CC7832
+		"error" #F50000 #BC3F3C
+	]
+
+	comment: {startsWith: "//"}
+	comment: {startsWith: "/*", endsWith: "*/"}
+
+	bracketPairs: ["{}", "[]", "()", "<>"]
+
+	contains: [
+		{builtin: #PROGRAM_NUMBER#}
+		{builtin: #DOUBLE_QUOTED_STRING#}
+		{builtin: #SINGLE_QUOTED_STRING#}
+
+		{match: /\\(?:[nrtbfv"'\\]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4})/ 0: "strEscape"}
+		{match: /@:([A-Za-z_][A-Za-z0-9_]*)/ 0: "meta"}
+		{match: /\b(package|import|using)\b/ 0: "keyword"}
+		{match: /\b(class|interface|enum|abstract|typedef)\b/ 0: "keyword"}
+		{match: /\b(extends|implements)\b/ 0: "keyword"}
+		{match: /\b(public|private|protected|static|override|dynamic|extern|inline|final|macro)\b/ 0: "keyword"}
+		{match: /\b(function|var)\b/ 0: "keyword"}
+		{match: /\b(if|else|switch|case|default|for|while|do|break|continue)\b/ 0: "keyword"}
+		{match: /\b(try|catch|throw|return)\b/ 0: "keyword"}
+		{match: /\b(new|this|super|cast|untyped|is|in|typeof)\b/ 0: "keyword"}
+		{match: /\b(true|false|null)\b/ 0: "constant"}
+		{match: /\b(Void|Bool|Int|Float|String|Dynamic|Any|Class|Enum|EnumValue|Null|UInt|Array|Map|Iterable|Iterator|KeyValueIterator|Date|EReg|Type|Reflect|Std|Math|Lambda|StringBuf|StringTools|Sys)\b/ 0: "type"}
+		{match: /\b(Null|Array|Map|Iterable|Iterator|KeyValueIterator)<[A-Za-z_][A-Za-z0-9_]*(?:\s*,\s*[A-Za-z_][A-Za-z0-9_]*)?>/ 0: "type"}
+		{match: /\b(class|interface|enum|abstract|typedef)\s+([A-Za-z_][A-Za-z0-9_]*)/ 1: "keyword" 2: "className"}
+		{match: /\bfunction\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(/ 1: "function"}
+		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*\(/ 1: "function"}
+
+		// {match: /\b[A-Za-z_][A-Za-z0-9_]*(?=\s*:\s*[A-Za-z_][A-Za-z0-9_]*)/ 0: "variable"}
+
+		{match: /\b[A-Z][A-Za-z0-9_]*(?=\s*[.;(])/ 0: "className"}
+		{match: /(?:==|!=|===|!==|<=|>=|&&|\|\||\+\+|--|\+=|-=|\*=|\/=|%=|<<|>>|>>>|=>|\.\.\.|[+\-*\/%=&<>!|&^~?:])/ 0: "operator"}
+		{match: /[{}()\[\];,.]/ 0: "operator"}
+	]
+}
