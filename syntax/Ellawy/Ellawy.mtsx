@@ -48,16 +48,25 @@
 		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(bool|boolean|int|float|string|number|void|any|object|array)\b/ 1: "variable" 2: "type"}
 		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*:\s*\[\s*(bool|boolean|int|float|string|number|any|object)\s*\]/ 1: "variable" 2: "type"}
 
-		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\b/ 2: "propKey"}
+		{match: /\b\.([A-Za-z_][A-Za-z0-9_]*)\b/ 0: "propKey"}
 		{match: /\b([A-Za-z_][A-Za-z0-9_]*)\s*:/ 1: "propKey"}
 
 		{number: "2|8|10|16", style: "number"}
 
 		// {match: /\+\+|--|==|!=|<=|>=|&&|\|\||\.\.|=>|=|\+|-|\*|\/|%|<|>|\!|\?|\.|&|\|/ 0: "operator"}
-		// {match: /\+\+|@|/ 0: "operator"}
 
-		{match: /@\s*(if|elseif)\s+([A-Za-z_][A-Za-z0-9_]*)/ 0: "operator"}
-		{match: /@\s*(if|elseif|else|end)/ 0: "operator"}
+		{group: link style: "operator" contains: [
+			{match: /(?m)^[^\S\n]*@/}
+			{group: select, contains: [
+				{match: /(else|end)(\b|$)/}
+				{group: link, contains: [
+					{match: /(if|elseif)\b/}
+					{match: /[^\S\n]+/}
+					{match: /([A-Za-z_][A-Za-z0-9_]*)\b/}
+					{match: /(\d{8}|\d\.\d{1,3}\.\d{1,3})\b/, 1: "operator"}
+				]}
+			]}
+		]}
 
 		{match: /~\s*[A-Za-z_][A-Za-z0-9_]*/ 0: "annotation"}
 	]
