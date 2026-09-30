@@ -1,5 +1,5 @@
 {
-	name: ["Haxe", ".hx", ".hxc"]
+	name: ["Haxe", ".hx", ".hxc", ".hxp"]
 
 	// hide: false
 	// ignoreCase: false
