@@ -12,7 +12,7 @@ Language Syntax Packs for [MT Manager](https://mt.cc) v2.26.9.
 - Finally, you have a special language syntax.
 
 ### All Files:
-- Click on **Code Button** and Download Zip,
+- Click on **Code Button** and Download Zip, --mobile user should make desktop mode to do that.
 - Open Mt Manager then go to ```/storage/emulated/0/Download/MTSX-Packs-main.zip```,
 - Extract the Zip or Go inside the Zip then go to ```syntax/$File/```,
 - Click on it then Install it,
